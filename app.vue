@@ -21,7 +21,7 @@ const loadArticles = computed(() => {
         <div class="mx-auto container py-16 sm:py-24 px-6 lg:px-8">
             <AnimationGrid
                 :gridItems="loadArticles"
-                :options="{ animateFrom: 'top', numberOfElements: 12 }"
+                :options="{ animateFrom: 'top', numberOfElements: 12, mode: 'random' }"
                 class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
             >
                 <template #animation-grid-item="{ image, title }">
