@@ -1,5 +1,6 @@
 interface OptionsAnimation {
     className?: string;
+    animateMoreThanOnce?: boolean;
 }
 
 interface OptionsTransitionDelay {
@@ -10,7 +11,10 @@ interface OptionsTransitionDelay {
 }
 
 export function useAnimation(options: OptionsAnimation = {}) {
-    const { className } = { ...{ className: "animation" }, ...options };
+    const { className, animateMoreThanOnce } = {
+        ...{ className: "animation", animateMoreThanOnce: false },
+        ...options,
+    };
 
     let observer: IntersectionObserver | null = null;
 
@@ -32,6 +36,8 @@ export function useAnimation(options: OptionsAnimation = {}) {
             entries.forEach((entry) => {
                 if (entry.isIntersecting && !entry.target.classList.contains(`start-${className}`)) {
                     entry.target.classList.add(`start-${className}`);
+                } else if (animateMoreThanOnce) {
+                    entry.target.classList.remove(`start-${className}`);
                 }
             });
         });
